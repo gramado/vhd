@@ -18,6 +18,7 @@ vhd-mount:
 	-sudo rm -r /mnt/gramadovhd2
 	sudo mkdir /mnt/gramadovhd2
 
+
 	@echo "================================="
 	@echo "Mounting the VHD ..."
 	-sudo umount /mnt/gramadovhd2
@@ -25,8 +26,9 @@ vhd-mount:
 
 	@echo "================================="
 	@echo "Copying files ..."
-	sudo cp bm/BM.BIN /mnt/gramadovhd2
-
+	sudo mkdir /mnt/gramadovhd2/BOOT
+	sudo cp bm/BM.BIN /mnt/gramadovhd2/BOOT/BM.BIN
+	sudo cp bm/BM.BIN /mnt/gramadovhd2/BM.BIN
 
 ## Step7 vhd-unmount        - Unmounting the VHD.
 vhd-unmount:
@@ -34,6 +36,11 @@ vhd-unmount:
 	@echo "Unmounting the VHD ..."
 
 	sudo umount /mnt/gramadovhd2
+
+
+# qemu 
+qemu-test:
+	qemu-system-x86_64 -hda DISK.VHD -m 128 -device e1000 -show-cursor -serial stdio
 
 
 
